@@ -1,0 +1,16 @@
+r1
+listem individual e coletivamente a
+quantidade de atendimentos realizados por dia e por médico.
+copia de cadastro consulta, so jselect de medico, table muda se varios ou 1 medico?
+RELATORIO CONSULTAS
+
+r2
+listem históricos de atendimento por paciente,
+listando data e o médico que o atendeu.
+HISTORICO RECEITUARIO
+
+r3
+listem individual e coletivamente
+uma tabela com os medicamentos prescritos pelos médicos.
+copia de r1, table muda se varios ou 1 medico?
+RelatorioPrescricoes

@@ -33,13 +33,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author Tomaszewski
  */
-public class CadastroConsulta extends javax.swing.JFrame {
+public class RelatorioConsultas extends javax.swing.JFrame {
     ArrayList<Consulta> consultas = new ArrayList<Consulta>();
     ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
     ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -47,9 +46,14 @@ public class CadastroConsulta extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public CadastroConsulta() {
+    public RelatorioConsultas() {
         initComponents();
-        populaCombos();
+        
+        int defaultSize =  jTable2.getColumnModel().getColumn(1).getWidth();
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(defaultSize);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(defaultSize);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(defaultSize);
+        
         atualizaTabela();
     }
 
@@ -65,18 +69,12 @@ public class CadastroConsulta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -84,42 +82,41 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Paciente:");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+            },
+            new String [] {
+                "Médico"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jTable1.setToolTipText("");
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
 
-        jButton1.setText("Cadastrar");
+        jButton1.setText("Gerar Relatório");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Atualizar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Deletar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Médico:");
-
-        jLabel4.setText("Horário:");
-
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
             }
         });
 
@@ -130,50 +127,23 @@ public class CadastroConsulta extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -196,13 +166,13 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable2.setToolTipText("");
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTable2MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -223,7 +193,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Cadastro Consulta");
+        jLabel2.setText("Relatório de Consultas");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -283,7 +253,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 791, Short.MAX_VALUE)
+            .addGap(0, 750, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -307,24 +277,17 @@ public class CadastroConsulta extends javax.swing.JFrame {
     private void populaCombos(){
         pacientes = DAO.PacienteDAO.select();
         medicos = DAO.MedicoDAO.select();
-        
-        for(Medico m : medicos){
-            jComboBox1.addItem(m.getNome());
-        }
-        
-        for(Paciente p : pacientes){
-            jComboBox2.addItem(p.getNome());
-        }
     }
     
     private void atualizaTabela(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         consultas = DAO.ConsultaDAO.select();
+        medicos = DAO.MedicoDAO.select();
         
         String statement;
         statement = "" +
-            "SELECT M.VC_NOME_MEDICO, P.VC_NOME_PACIENTE, VC_HORARIO\n" +
+            "SELECT M.VC_NOME_MEDICO\n" +
             "   FROM CONSULTA C\n" +
             "       JOIN MEDICO M\n" +
             "           ON M.PK_COD_MEDICO = C.FK_COD_MEDICO\n" +
@@ -341,7 +304,7 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 rs = stmt.executeQuery(statement);
                
                 while(rs.next()){
-                    model.addRow(new Object[]{rs.getString("VC_NOME_MEDICO"),rs.getString("VC_NOME_PACIENTE"),rs.getString("VC_HORARIO")});
+                    model.addRow(new Object[]{rs.getString("VC_NOME_MEDICO")});
                 }
         } catch (ClassNotFoundException | SQLException e) {
             throw new java.lang.RuntimeException("erro ao conectar");
@@ -353,70 +316,83 @@ public class CadastroConsulta extends javax.swing.JFrame {
         }
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String d = jTextField1.getText();
-        Medico m = medicos.get(jComboBox1.getSelectedIndex());
-        Paciente p = pacientes.get(jComboBox2.getSelectedIndex());
-        String r = "";
-        
-        Consulta c = new Consulta(d, m.getCodigo(), p.getCodigo(), r, 0);
-        
-        DAO.ConsultaDAO.insert(c);
-        
-        atualizaTabela();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int index = jTable1.getSelectedRow();
-        Consulta consultaOriginal = consultas.get(index);
-        if (index != -1){
-            String d = jTextField1.getText();
-            Medico m = medicos.get(jComboBox1.getSelectedIndex());
-            Paciente p = pacientes.get(jComboBox2.getSelectedIndex());
-            String r = consultaOriginal.getReceituario();
-            
-            Consulta c = new Consulta(d, m.getCodigo(), p.getCodigo(), r, consultaOriginal.getCodigo());
-            
-            DAO.ConsultaDAO.update(c);
-
-            atualizaTabela();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione a Consulta a ser atualizada");
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int i = jTable1.getSelectedRow();
-        TableModel model = jTable1.getModel();
-        jComboBox1.setSelectedItem(model.getValueAt(i, 0).toString());
-        jComboBox2.setSelectedItem(model.getValueAt(i, 1).toString());
-        jTextField1.setText(model.getValueAt(i, 2).toString());
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int[] index = jTable1.getSelectedRows();
         
-        if (index.length != 0){
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        
+        if(index.length == 0){
+            model.addRow(new Object[]{"-","-","-"});
+            JOptionPane.showMessageDialog(rootPane, "Nenhum resultado encontrado!");
+        } else {
+            String medicosSelecionados = "";
             for (int i : index) {
+                medicosSelecionados += medicos.get(i).getCodigo() + ", ";
+            }
+            medicosSelecionados = medicosSelecionados.substring(0, medicosSelecionados.length()-2);
+
+            consultas = DAO.ConsultaDAO.select();
+
+            String statement;
+            statement = "" +
+                "SELECT M.VC_NOME_MEDICO, P.VC_NOME_PACIENTE, C.VC_HORARIO\n" +
+                "   FROM CONSULTA C\n" +
+                "       JOIN MEDICO M\n" +
+                "           ON M.PK_COD_MEDICO = C.FK_COD_MEDICO\n" +
+                "       JOIN PACIENTE P\n" +
+                "           ON P.PK_COD_PACIENTE = C.FK_COD_PACIENTE" +
+                "       WHERE M.PK_COD_MEDICO IN (" + medicosSelecionados + ")";
+
+            java.sql.Statement stmt = null;
+            ResultSet rs;
+            try {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433; DatabaseName = SGC", "sa", "sa");
+
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(statement);
+
+                    while(rs.next()){
+                        model.addRow(new Object[]{rs.getString("VC_NOME_MEDICO"),rs.getString("VC_NOME_PACIENTE"),rs.getString("VC_HORARIO")});
+                    }
+            } catch (ClassNotFoundException | SQLException e) {
+                throw new java.lang.RuntimeException("erro ao conectar");
+            } finally {
                 try {
-                    DAO.ConsultaDAO.delete(consultas.get(i));
-                } catch (SQLException ex) {
-                    JOptionPane.showConfirmDialog(rootPane, "A consulta não pode ser excluida!");
+                    stmt.close();
+                } catch (SQLException ignore){
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione o Paciente a ser removido");
         }
-        atualizaTabela();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+        if(index.length == 1){
+            jTable2.getColumnModel().getColumn(0).setMinWidth(0);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable2.getColumnModel().getColumn(0).setWidth(0);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(0);
+            
+            jLabel2.setText("Relatório de Consultas de " + medicos.get(index[0]).getNome());
+            
+        } else {
+            jLabel2.setText("Relatório de Consultas");
+            int tamanho  = jTable2.getColumnModel().getTotalColumnWidth()  / 3;
+            
+            jTable2.getColumnModel().getColumn(0).setMinWidth(tamanho);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(tamanho);
+            jTable2.getColumnModel().getColumn(0).setWidth(tamanho);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(tamanho);
+            
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(tamanho);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(tamanho);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,41 +411,36 @@ public class CadastroConsulta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroConsulta().setVisible(true);
+                new RelatorioConsultas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
