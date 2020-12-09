@@ -28,12 +28,20 @@ package Interface;
  * @author Tomaszewski
  */
 public class InterfaceCadastro extends javax.swing.JFrame {
-
+    private static InterfaceCadastro interfaceCadastro;
+    
     /**
      * Creates new form Interface
      */
-    public InterfaceCadastro() {
+    private InterfaceCadastro() {
         initComponents();
+    }
+    
+    public static InterfaceCadastro getInterfaceCadastro() {
+        if (interfaceCadastro == null){
+            interfaceCadastro = new InterfaceCadastro();
+        }
+        return interfaceCadastro;
     }
 
     /**

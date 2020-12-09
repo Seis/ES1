@@ -33,8 +33,7 @@ import java.util.logging.Logger;
  * @author Tomaszewski
  */
 public class InterfaceHistoricoFamiliar extends javax.swing.JFrame {
-    Paciente p;
-    int index;
+    private Paciente p;
     
     /**
      * Creates new form Interface
@@ -47,7 +46,6 @@ public class InterfaceHistoricoFamiliar extends javax.swing.JFrame {
         initComponents();
         
         this.p = DAO.PacienteDAO.select().get(index);
-        this.index = index;
         jTextArea1.setText(p.getHistorico());
     }
 

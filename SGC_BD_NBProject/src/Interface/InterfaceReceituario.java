@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  * @author Tomaszewski
  */
 public class InterfaceReceituario extends javax.swing.JFrame {
-    Consulta c;
+    private Consulta c;
     
     /**
      * Creates new form Interface

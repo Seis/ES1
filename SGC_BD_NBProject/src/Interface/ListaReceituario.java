@@ -41,9 +41,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Tomaszewski
  */
 public class ListaReceituario extends javax.swing.JFrame {
-    Paciente paciente;
-    ArrayList<Consulta> consultas = new ArrayList<Consulta>();
-    ArrayList<Medico> medicos = new ArrayList<Medico>();
+    private Paciente paciente;
+    private ArrayList<Consulta> consultas = new ArrayList<Consulta>();
+    private ArrayList<Medico> medicos = new ArrayList<Medico>();
     
     /**
      * Creates new form NewJFrame

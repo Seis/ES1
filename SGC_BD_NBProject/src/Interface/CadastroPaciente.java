@@ -35,7 +35,7 @@ import javax.swing.table.TableModel;
  * @author Tomaszewski
  */
 public class CadastroPaciente extends javax.swing.JFrame {
-    ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+    private ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
     /**
      * Creates new form NewJFrame

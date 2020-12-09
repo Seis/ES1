@@ -39,9 +39,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Tomaszewski
  */
 public class RelatorioConsultas extends javax.swing.JFrame {
-    ArrayList<Consulta> consultas = new ArrayList<Consulta>();
-    ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
-    ArrayList<Medico> medicos = new ArrayList<Medico>();
+    private ArrayList<Consulta> consultas = new ArrayList<Consulta>();
+    private ArrayList<Medico> medicos = new ArrayList<Medico>();
     
     /**
      * Creates new form NewJFrame
@@ -274,11 +273,6 @@ public class RelatorioConsultas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void populaCombos(){
-        pacientes = DAO.PacienteDAO.select();
-        medicos = DAO.MedicoDAO.select();
-    }
-    
     private void atualizaTabela(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
